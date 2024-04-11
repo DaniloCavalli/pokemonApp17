@@ -1,0 +1,17 @@
+header{
+    background-color: lightcyan;
+    padding: 10px;
+}
+
+nav {
+    ul {
+        display: flex;
+        justify-content: end;
+        li{
+            margin-left: 20px;
+        }
+        li.logout{
+            margin-left: 60px;
+        }
+    }
+}
