@@ -9,10 +9,26 @@
             <div class="col-10">
                 <nav>
                     <ul>
-                        <li class="nav-link" routerLink="home">home</li>
-                        <li class="nav-link" routerLink="search">search</li>
-                        <li class="nav-link" routerLink="favorites">favorites</li>
-                        <li class="nav-link" routerLink="logout">log out</li>
+                        <li class="nav-link"><a 
+                            routerLink="home" 
+                            routerLinkActive 
+                            #home="routerLinkActive"
+                            [ngClass]="home.isActive ? 'active' : '' ">home</a></li>
+                        <li class="nav-link"><a 
+                            routerLink="search"
+                            routerLinkActive
+                            #search="routerLinkActive"
+                            [ngClass]="search.isActive ? 'active' : '' ">search</a></li>
+                        <li class="nav-link"><a 
+                            routerLink="favorites"
+                            routerLinkActive
+                            #favorites="routerLinkActive"
+                            [ngClass]="favorites.isActive ? 'active' : '' ">favorites</a></li>
+                        <li class="nav-link"><a 
+                            routerLink="logout"
+                            routerLinkActive
+                            #logOut="routerLinkActive"
+                            [ngClass]="logOut.isActive ? 'active' : '' ">log out</a></li>
                     </ul>
                 </nav>
             </div>
