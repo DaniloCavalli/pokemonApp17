@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/componenets/header/header.component';
+import { PokemonStore } from './store/pokemon.store';
 
 @Component({
   selector: 'app-root',
@@ -14,4 +15,12 @@ import { HeaderComponent } from './shared/componenets/header/header.component';
 })
 export class AppComponent {
   title = 'myPokemonApp';
+  
+  store = inject(PokemonStore);
+
+  constructor(){
+  this.store.loadPokemonList();
+  }
+
+
 }
