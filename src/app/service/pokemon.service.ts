@@ -10,7 +10,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
 export class PokemonService {
 
     http = inject(HttpClient);
-    private urlPokemonList = 'https://pokeapi.co/api/v2/pokemon/?limit=10';
+    private urlPokemonList = 'https://pokeapi.co/api/v2/pokemon/?limit=30';
     private urlPokemon = 'https://pokeapi.co/api/v2/pokemon';
 
     display = false;

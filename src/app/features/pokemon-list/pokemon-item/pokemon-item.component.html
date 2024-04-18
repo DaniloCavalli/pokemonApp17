@@ -9,10 +9,9 @@
       <img [src]=" pokemon().sprites?.back_default " alt="">
     </div>
     <div class="col-4">
-      <p>abilities</p>
-      <label *ngFor=" let abilities of abilities() ">
-        {{ abilities.ability['name'] }}
-      </label>
+      <b>abilities</b>
+      <p *ngFor=" let abilities of abilities() ">
+      {{ abilities.ability['name'] }}</p>
     </div>
   </div>
 </div>

@@ -17,12 +17,15 @@ export class PokemonListComponent {
     store = inject(PokemonStore);
     pokemonService = inject(PokemonService)
 
+    display = false;
+
     pokemonList = this.pokemonService.pokemonListSignal;
 
     pokemon = this.pokemonService.pokemonSignal;
 
     getPokemon(url: string){
       this.pokemonService.getPokemon(url);
+      this.display = true;
     }
 
 
