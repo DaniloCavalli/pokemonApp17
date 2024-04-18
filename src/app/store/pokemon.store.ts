@@ -1,6 +1,6 @@
-import { patchState, signalStore, withMethods, withState } from "@ngrx/signals";
+import { patchState, signalStore, withComputed, withMethods, withState } from "@ngrx/signals";
 import { Pokemon } from "../model/pokemon.model";
-import { inject } from "@angular/core";
+import { computed, inject } from "@angular/core";
 import { PokemonService } from "../service/pokemon.service";
 
 
@@ -29,9 +29,7 @@ export const PokemonStore = signalStore(
 
                 patchState( store, {loading: true} )
 
-                const pokemonList = pokemonService.getPokemonList();
 
-                patchState( store, {pokemonList, loading: false} )
 
             }
 

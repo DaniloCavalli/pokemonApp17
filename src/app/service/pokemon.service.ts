@@ -1,8 +1,10 @@
 import { Injectable, inject, signal } from "@angular/core";
-import { Observable, map, tap } from "rxjs";
+import { BehaviorSubject, Observable, map, tap } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { Pokemon } from "../model/pokemon.model";
-import { toDeepSignal } from "@ngrx/signals/src/deep-signal";
+import { toSignal } from "@angular/core/rxjs-interop";
+
+
 
 @Injectable({providedIn: 'root'})
 export class PokemonService {
@@ -11,34 +13,33 @@ export class PokemonService {
     private urlPokemonList = 'https://pokeapi.co/api/v2/pokemon/?limit=10';
     private urlPokemon = 'https://pokeapi.co/api/v2/pokemon';
 
+    
+    private pokemonList$ = this.http.get<any>(this.urlPokemonList)
+    .pipe(
+        map( data => data['results']  )
+    )
+    
 
-    pokemonList: Pokemon[] = [];
+    private pokemonSub = new BehaviorSubject({});
+    pokemon$: Observable<any> = this.pokemonSub.asObservable();
+    
 
-    pokemonListSignal = signal<Pokemon[]>([]);
-
-    getPokemonList(){
-        console.log('start fetching pokemon')
-
-        this.http.get(this.urlPokemonList)
-            .pipe(
-                tap( (results: any) =>  {
-                    results.results.forEach((element: any) => {
-                        this.http.get(element.url)
-                        .subscribe((pokemon: any) => {
-                            this.pokemonList.push(
-                                new Pokemon( pokemon.id, pokemon.name, pokemon.sprites.front_default, pokemon.abilities )
-                            )
-                            this.pokemonList.sort( (a: any,b: any) => a.id - b.id )
-                        })
-                    });
-                })
-            )
-            .subscribe( pokemonList => {
-                this.pokemonListSignal.set(pokemonList)
+    getPokemon(url: string){
+        this.http.get(url)
+        .pipe(
+            map( data => {
+                console.log('data', data)
+                this.pokemonSub.next(data) 
             })
-
-        console.log('pokemonList', this.pokemonList)
-
+        ).subscribe()
     }
+    
+
+    // expose signal
+    public pokemonListSignal = toSignal(this.pokemonList$);
+    public pokemonSignal = toSignal(this.pokemon$);
+   
+
+
 
 }

@@ -19,7 +19,7 @@ export class AppComponent {
   store = inject(PokemonStore);
 
   constructor(){
-  this.store.loadPokemonList();
+    this.store.loadPokemonList();
   }
 
 
