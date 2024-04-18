@@ -20,29 +20,6 @@
       <app-pokemon-item 
       [pokemon]="pokemon"></app-pokemon-item>
 
-      <div class="card p-2">
-        <h2>
-          {{ pokemon().name }}
-        </h2>
-        <p> ID: {{ pokemon().id }} </p>
-        <div class="row">
-          <div class="col-4">
-            <img [src]=" pokemon().sprites?.front_default " alt="">
-          </div>
-          <div class="col-4">
-            <img [src]=" pokemon().sprites?.back_default " alt="">
-          </div>
-          <div class="col-4">
-              <p>Abilities:</p>
-              <label *ngFor=" let abilities of pokemonAbilities()">
-                {{ abilities.ability['name'] }}
-              </label>
-          </div>
-        </div>
-
-      </div>
-
-
     </div>
 
 
