@@ -21,6 +21,8 @@ export class PokemonListComponent {
 
     pokemon = this.pokemonService.pokemonSignal;
 
+    pokemonAbilities = this.pokemonService.pokemonAbilitiesSignal;
+
     getPokemon(url: string){
       this.pokemonService.getPokemon(url);
     }

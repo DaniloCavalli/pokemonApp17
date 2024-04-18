@@ -1,7 +1,7 @@
+import { Pokemon } from './../model/pokemon.model';
 import { Injectable, inject, signal } from "@angular/core";
 import { BehaviorSubject, Observable, map, tap } from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import { Pokemon } from "../model/pokemon.model";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 
@@ -22,14 +22,18 @@ export class PokemonService {
 
     private pokemonSub = new BehaviorSubject({});
     pokemon$: Observable<any> = this.pokemonSub.asObservable();
+
+    private abilitiesSub = new BehaviorSubject<any>([]);
+    abilities$: Observable<any> = this.abilitiesSub.asObservable();
     
 
     getPokemon(url: string){
         this.http.get(url)
         .pipe(
-            map( data => {
+            map( (data: any) => {
                 console.log('data', data)
-                this.pokemonSub.next(data) 
+                this.pokemonSub.next(data)
+                this.abilitiesSub.next(data.abilities)
             })
         ).subscribe()
     }
@@ -38,6 +42,7 @@ export class PokemonService {
     // expose signal
     public pokemonListSignal = toSignal(this.pokemonList$);
     public pokemonSignal = toSignal(this.pokemon$);
+    public pokemonAbilitiesSignal = toSignal(this.abilities$);
    
 
 
