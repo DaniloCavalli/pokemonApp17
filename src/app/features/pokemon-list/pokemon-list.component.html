@@ -14,13 +14,27 @@
       </ul>
     </div>
 
-    <div class="col-6 offset-2">
-      <h4>pokemon detail</h4>
+      <div class="col-6 offset-2">
+        <h4>pokemon detail</h4>
+  
+        @defer() {
+          <app-pokemon-item 
+          [pokemon]="pokemon"></app-pokemon-item>
+        }
+        @placeholder{
+          <section class="placeholder">
+            ##### this is a placeholder ####
+          </section>
+        }
+        @loading(minimum 1.5s){
+          <section class="container loading">Loading...</section>
+        }
+  
+      </div>
 
-      <app-pokemon-item 
-      [pokemon]="pokemon"></app-pokemon-item>
-
-    </div>
+    <ng-template #placeholder>
+      <h3>placeholder</h3>
+    </ng-template>
 
 
 

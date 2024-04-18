@@ -13,6 +13,8 @@ export class PokemonService {
     private urlPokemonList = 'https://pokeapi.co/api/v2/pokemon/?limit=10';
     private urlPokemon = 'https://pokeapi.co/api/v2/pokemon';
 
+    display = false;
+
     
     private pokemonList$ = this.http.get<any>(this.urlPokemonList)
     .pipe(
