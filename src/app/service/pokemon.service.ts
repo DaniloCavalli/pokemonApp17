@@ -10,16 +10,42 @@ import { toSignal } from "@angular/core/rxjs-interop";
 export class PokemonService {
 
     http = inject(HttpClient);
-    private urlPokemonList = 'https://pokeapi.co/api/v2/pokemon/?limit=30';
+    private urlPokemonList = 'https://pokeapi.co/api/v2/pokemon/?limit=5';
     private urlPokemon = 'https://pokeapi.co/api/v2/pokemon';
 
     display = false;
+
+    pokemonArr: any[] = [];
 
     
     private pokemonList$ = this.http.get<any>(this.urlPokemonList)
     .pipe(
         map( data => data['results']  )
     )
+
+    private pokemonFullList$ = this.http.get<any>(this.urlPokemonList)
+        .pipe(
+            map( data => {
+                data.results.forEach( (item: any) => {
+                    this.http.get(item.url)
+                        .pipe(
+                            map( data => data )
+                        ).subscribe( (res: any) => {
+                            console.log('res', res)
+                            
+                            const pokemon = {
+                                id: res.id,
+                                name: res.name,
+                                abilities: res.abilities
+                            }
+
+                            console.log('pokemon', pokemon)
+                            this.pokemonArr.push(pokemon);
+    
+                        })
+                })
+            })
+        )
     
 
     private pokemonSub = new BehaviorSubject({});
@@ -27,6 +53,9 @@ export class PokemonService {
 
     private abilitiesSub = new BehaviorSubject<any>([]);
     abilities$: Observable<any> = this.abilitiesSub.asObservable();
+
+    private pokemonFullListSub = new BehaviorSubject([]);
+    pokemonFullListObs$: Observable<any[]> = this.pokemonFullListSub.asObservable();
     
 
     getPokemon(url: string){
@@ -45,6 +74,8 @@ export class PokemonService {
     public pokemonListSignal = toSignal(this.pokemonList$);
     public pokemonSignal = toSignal(this.pokemon$);
     public pokemonAbilitiesSignal = toSignal(this.abilities$);
+    public pokemonFullListSignal = toSignal(this.pokemonFullList$);
+    public pokemonFullListObsSignal = toSignal(this.pokemonFullListObs$)
    
 
 

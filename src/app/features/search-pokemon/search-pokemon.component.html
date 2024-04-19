@@ -1,5 +1,27 @@
-<ng-select [items]="cars" 
-           bindLabel="name" 
-           bindValue="id" 
-           [(ngModel)]="selectedCar">
-</ng-select>
+
+<div class="container">
+    <div class="row">
+        <div class="col-8 offset-2 text-center mt-4">
+            <h1>Search Pokemon</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4 offset-4">
+            <ng-select 
+            [items]="cars" 
+            bindLabel="name" 
+            bindValue="id" 
+            [(ngModel)]="selectedCar">
+            </ng-select>
+        </div>
+    </div>
+</div>
+
+<div>
+    list here
+
+    <br>
+
+    {{ pokemonFullList() | json }}
+</div>
+

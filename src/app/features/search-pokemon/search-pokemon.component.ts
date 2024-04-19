@@ -1,18 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
+import { PokemonService } from '../../service/pokemon.service';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-search-pokemon',
   standalone: true,
   imports: [
     NgSelectModule,
-    FormsModule
+    FormsModule,
+    JsonPipe
   ],
   templateUrl: './search-pokemon.component.html',
   styleUrl: './search-pokemon.component.scss'
 })
 export class SearchPokemonComponent {
+
+  pokemonService = inject(PokemonService);
+
+  pokemonFullList = this.pokemonService.pokemonFullListSignal;
 
   selectedCar!: number;
 
