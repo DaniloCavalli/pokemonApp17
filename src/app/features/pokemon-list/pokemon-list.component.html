@@ -1,57 +1,32 @@
-
 <div class="container">
   <div class="row">
+    <div class="col-4">
+      <div class="pokemon-list mt-4">
+        <h2>Pokemon List</h2>
 
-      <div class="col-4">
-        <h4>pokemon list</h4>
-        <ul>
-          <li 
-          *ngFor=" let pokemon of pokemonList(); let i = index "
-          (click)="getPokemon(pokemon.url)">
-            <a class="list-item">{{pokemon.name}}</a>
-            <span> ID: {{ i + 1 }} </span>
-          </li>
-        </ul>
+        @for( pokemon of pokemonList(); track pokemon ){
+          <a 
+          class="pokemon-item mt-2 card p-2"
+          (click)="displayDetail(pokemon)">
+              {{ pokemon['name'] }}
+          </a>
+        }
+        
       </div>
+    </div>
+    <div class="col-4 offset-2">
 
-      <div class="col-6 offset-2">
-        <h4>pokemon detail</h4>
-
-        @if( display ){
-          
-           @defer() {
-          <app-pokemon-item 
-          [pokemon]="pokemon"></app-pokemon-item>
-          }
-          @placeholder{
-            <section class="placeholder">
-              ##### this is a placeholder ####
-            </section>
-          }
-          @loading(minimum 1.5s){
-            <section class="container loading">Loading...</section>
-          }
-
-        }
-        @else {
-          <div>###  this is a placeholder ###</div>
-        }
-
-        <!-- @defer() {
-          <app-pokemon-item 
-          [pokemon]="pokemon"></app-pokemon-item>
-        }
-        @placeholder{
-          <section class="placeholder">
-            ##### this is a placeholder ####
-          </section>
-        }
-        @loading(minimum 1.5s){
-          <section class="container loading">Loading...</section>
-        } -->
-  
-      </div>
+      @if( pokemon ){
+        <app-pokemon-item [pokemon]="pokemon"></app-pokemon-item>
+      }
+      @else {
+        <div class="card m-5 text-center">
+          select pokemon from the list
+        </div>
+      }
 
 
+
+    </div>
   </div>
 </div>

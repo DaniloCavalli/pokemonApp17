@@ -3,6 +3,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { PokemonService } from '../../service/pokemon.service';
 import { JsonPipe } from '@angular/common';
+import { NewPokemonService } from '../../service/newPokemon.service';
 
 @Component({
   selector: 'app-search-pokemon',
@@ -17,9 +18,11 @@ import { JsonPipe } from '@angular/common';
 })
 export class SearchPokemonComponent {
 
-  pokemonService = inject(PokemonService);
 
-  pokemonFullList = this.pokemonService.pokemonFullListSignal;
+  newPokemonService = inject(NewPokemonService);
+
+  pokemonList = this.newPokemonService.pokemonListFullSignal;
+
 
   selectedCar!: number;
 

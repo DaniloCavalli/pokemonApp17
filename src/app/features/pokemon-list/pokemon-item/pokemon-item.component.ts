@@ -18,17 +18,8 @@ import { CommonModule, JsonPipe } from '@angular/common';
 })
 export class PokemonItemComponent {
   
-  @Input() pokemon: any;
-    
 
-  pokemonService = inject(PokemonService)
+  @Input() pokemon: any = {};
 
-  pokemonList = this.pokemonService.pokemonListSignal;
-
-  getPokemon(url: string){
-    this.pokemonService.getPokemon(url);
-  }
-
-  abilities = this.pokemonService.pokemonAbilitiesSignal;
 
 }

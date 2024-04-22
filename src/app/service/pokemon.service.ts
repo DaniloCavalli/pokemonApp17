@@ -31,7 +31,7 @@ export class PokemonService {
                         .pipe(
                             map( data => data )
                         ).subscribe( (res: any) => {
-                            console.log('res', res)
+                            //console.log('res', res)
                             
                             const pokemon = {
                                 id: res.id,
@@ -39,7 +39,7 @@ export class PokemonService {
                                 abilities: res.abilities
                             }
 
-                            console.log('pokemon', pokemon)
+                            //console.log('pokemon', pokemon)
                             this.pokemonArr.push(pokemon);
     
                         })

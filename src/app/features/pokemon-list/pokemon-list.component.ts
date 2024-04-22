@@ -1,8 +1,10 @@
+import { Pokemon } from './../../model/pokemon.model';
 import { PokemonService } from './../../service/pokemon.service';
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject, input } from '@angular/core';
 import { PokemonStore } from '../../store/pokemon.store';
 import { PokemonItemComponent } from './pokemon-item/pokemon-item.component';
 import { CommonModule, JsonPipe } from '@angular/common';
+import { NewPokemonService } from '../../service/newPokemon.service';
 
 
 @Component({
@@ -13,21 +15,15 @@ import { CommonModule, JsonPipe } from '@angular/common';
   styleUrl: './pokemon-list.component.scss'
 })
 export class PokemonListComponent {
-  
-    store = inject(PokemonStore);
-    pokemonService = inject(PokemonService)
 
-    display = false;
+  pokemonService = inject(NewPokemonService);
 
-    pokemonList = this.pokemonService.pokemonListSignal;
+  pokemonList: any = this.pokemonService.pokemonListFullSignal;
 
-    pokemon = this.pokemonService.pokemonSignal;
+  pokemon: any;
 
-    getPokemon(url: string){
-      this.pokemonService.getPokemon(url);
-      this.display = true;
-    }
-
-
+  displayDetail(pokemon: any){
+    this.pokemon = pokemon;
+  }
 
 }

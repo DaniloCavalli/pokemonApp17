@@ -1,17 +1,11 @@
-<div class="card p-3">
-  <h2> {{ pokemon().name }} </h2>
-  <p><b>ID: {{ pokemon().id }}</b></p>
-  <div class="row">
-    <div class="col-4">
-      <img [src]=" pokemon().sprites?.front_default " alt="">
-    </div>
-    <div class="col-4">
-      <img [src]=" pokemon().sprites?.back_default " alt="">
-    </div>
-    <div class="col-4">
-      <b>abilities</b>
-      <p *ngFor=" let abilities of abilities() ">
-      {{ abilities.ability['name'] }}</p>
-    </div>
-  </div>
+<div class="pokemon-detail mt-4 card p-2">
+  <h2>{{ pokemon['name'] }}</h2>
+  <p><b>ID: {{ pokemon['id'] }}</b></p>
+  <img [src]="pokemon['sprites']?.front_default" alt="">
+  <ul class="">
+    <label for="" class="mt-2">Abilities</label>
+    @for( ability of pokemon['abilities']; track ability ){
+      <li>{{ ability['ability'].name }}</li>
+    }
+  </ul>
 </div>
