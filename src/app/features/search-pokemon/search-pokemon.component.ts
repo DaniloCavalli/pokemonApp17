@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { PokemonService } from '../../service/pokemon.service';
 import { JsonPipe } from '@angular/common';
 import { NewPokemonService } from '../../service/newPokemon.service';
+import { PokemonItemComponent } from '../pokemon-list/pokemon-item/pokemon-item.component';
 
 @Component({
   selector: 'app-search-pokemon',
@@ -11,7 +12,8 @@ import { NewPokemonService } from '../../service/newPokemon.service';
   imports: [
     NgSelectModule,
     FormsModule,
-    JsonPipe
+    JsonPipe,
+    PokemonItemComponent
   ],
   templateUrl: './search-pokemon.component.html',
   styleUrl: './search-pokemon.component.scss'
@@ -21,16 +23,17 @@ export class SearchPokemonComponent {
 
   newPokemonService = inject(NewPokemonService);
 
-  pokemonList = this.newPokemonService.pokemonListFullSignal;
+  pokemonList: any = this.newPokemonService.pokemonListFullSignal;
 
+  selectedPokemonId: any;
 
-  selectedCar!: number;
+  selectedPokemon: any;
 
-  cars = [
-      { id: 1, name: 'Volvo' },
-      { id: 2, name: 'Saab' },
-      { id: 3, name: 'Opel' },
-      { id: 4, name: 'Audi' },
-  ];
+  onSelectedPokemon(id: any){
+    const pokemonArr = this.pokemonList().filter( (pokemon: any) => pokemon['id'] === id);
+    
+    const selected = Object.assign({}, ...pokemonArr)
+    this.selectedPokemon = selected;
+  }
 
 }

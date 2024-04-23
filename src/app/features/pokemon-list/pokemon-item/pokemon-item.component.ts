@@ -1,8 +1,8 @@
 import { Component, Input, inject, input } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
-import { PokemonService } from '../../../service/pokemon.service';
 import { CommonModule, JsonPipe } from '@angular/common';
+import { NewPokemonService } from '../../../service/newPokemon.service';
 
 @Component({
   selector: 'app-pokemon-item',
@@ -18,8 +18,12 @@ import { CommonModule, JsonPipe } from '@angular/common';
 })
 export class PokemonItemComponent {
   
+  private pokemonService = inject(NewPokemonService)
 
   @Input() pokemon: any = {};
-
+  
+  addToFavorites( pokemon: any ){
+    this.pokemonService.addToFavories(pokemon)
+  }
 
 }
