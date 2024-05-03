@@ -3,6 +3,11 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { NewPokemonService } from '../../../service/newPokemon.service';
+import { patchState } from '@ngrx/signals';
+import { PokemonStore } from '../../../store/pokemon.store';
+import { DialogService } from '@ngneat/dialog';
+import { PokemonDetailComponent } from '../pokemon-detail/pokemon-detail.component';
+import { Pokemon } from '../../../model/pokemon.model';
 
 @Component({
   selector: 'app-pokemon-item',
@@ -18,9 +23,14 @@ import { NewPokemonService } from '../../../service/newPokemon.service';
 })
 export class PokemonItemComponent {
   
-  private pokemonService = inject(NewPokemonService)
+  private dialog = inject(DialogService);
+  store = inject(PokemonStore);
 
-  @Input() pokemon: any = {};
+  @Input() pokemon: Pokemon = {id: '', name: '', images: []};
   
+  onSelectedPokemon(){
+    this.store.setSelectedPokemon(this.pokemon);
+    this.dialog.open( PokemonDetailComponent, {data: {...this.pokemon}} )
+  }
 
 }

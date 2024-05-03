@@ -12,9 +12,12 @@ export class PokemonStoreService {
     http = inject(HttpClient);
     store = inject(PokemonStore);
 
-    private urlPokemonList = 'https://pokeapi.co/api/v2/pokemon/?limit=10';
+    private urlPokemonList = 'https://pokeapi.co/api/v2/pokemon/?limit=50';
         
     getPokemonListNew(){
+
+        patchState( this.store, { loading: true } )
+
         this.http.get<any>(this.urlPokemonList)
             .pipe(
                 switchMap( (response: any) => {
@@ -34,11 +37,15 @@ export class PokemonStoreService {
                         id: obj.id,
                         name: obj.name,
                         imagePath: obj.sprites.front_default,
-                        url: obj.url
+                        url: obj.url,
+                        images: obj.sprites
+                        
                     }
                 ))
 
                 this.store.setPokemonList(filteredPokemonList)
+
+                patchState( this.store, { loading: false } )
             })
 
     }

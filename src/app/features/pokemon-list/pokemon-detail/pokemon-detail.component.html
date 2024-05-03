@@ -1,0 +1,23 @@
+<h2>{{name}}</h2>
+
+<div class="images px-5">
+  <div class="row">
+    <img class="col-6 p-3" [src]="images.back_default" alt="">
+    <img class="col-6 p-3" [src]="images.front_default" alt="">
+    <img class="col-6 p-3" [src]="images.front_shiny" alt="">
+    <img class="col-6 p-3" [src]="images.back_shiny" alt="">
+  </div>
+</div>
+
+<div class="abilities">
+  <p>abilities:</p>
+  
+    @for( ability of abilities; track ability  ){
+      <span> {{ ability?.ability['name'] }} </span>
+    }
+
+</div>
+
+<div class="actions">
+  <button mat-button mat-raised-button color="primary">Add To Favorites</button>
+</div>

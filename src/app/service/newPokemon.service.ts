@@ -20,7 +20,6 @@ export class NewPokemonService {
 
     pokemonUrls$ = this.http.get(this.urlPokemonList)
         .pipe(
-            tap( () => console.log('http executed') ),
             map( (data: any) => data['results']),
             shareReplay()
         )

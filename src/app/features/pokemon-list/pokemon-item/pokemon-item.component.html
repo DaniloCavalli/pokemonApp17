@@ -1,6 +1,5 @@
-<mat-card class="example-card">
+<mat-card class="pokemon-list-item">
   <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>{{ pokemon.name }}</mat-card-title>
   </mat-card-header>
   <img mat-card-image [src]='pokemon.imagePath' alt="Photo of a Shiba Inu">
@@ -9,6 +8,9 @@
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>SHOW DETAIL</button>
+    <button
+    mat-raised-button color="primary"
+    (click)="onSelectedPokemon()"
+    mat-button>SHOW DETAIL</button>
   </mat-card-actions>
 </mat-card>
