@@ -22,8 +22,5 @@ export class PokemonItemComponent {
 
   @Input() pokemon: any = {};
   
-  addToFavorites( pokemon: any ){
-    this.pokemonService.addToFavories(pokemon)
-  }
 
 }

@@ -36,7 +36,7 @@ export class PokemonService {
                             const pokemon = {
                                 id: res.id,
                                 name: res.name,
-                                abilities: res.abilities
+                                abilities: res.abilitiesb
                             }
 
                             //console.log('pokemon', pokemon)

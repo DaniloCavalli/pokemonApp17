@@ -1,32 +1,16 @@
+
+
 <div class="container">
   <div class="row">
-    <div class="col-4">
-      <div class="pokemon-list mt-4">
-        <h2>Pokemon List</h2>
 
-        @for( pokemon of pokemonList(); track pokemon ){
-          <a 
-          class="pokemon-item mt-2 card p-2"
-          (click)="displayDetail(pokemon)">
-              {{ pokemon['name'] }}
-          </a>
-        }
-        
+
+    @for( pokemon of pokemonList(); track pokemon ){
+      <div class="col-3 mt-3">
+        <app-pokemon-item 
+        [pokemon]="pokemon"></app-pokemon-item>
       </div>
-    </div>
-    <div class="col-4 offset-2">
+    }
 
-      @if( pokemon ){
-        <app-pokemon-item [pokemon]="pokemon"></app-pokemon-item>
-      }
-      @else {
-        <div class="card m-5 text-center">
-          select pokemon from the list
-        </div>
-      }
-
-
-
-    </div>
   </div>
 </div>
+

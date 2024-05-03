@@ -16,14 +16,13 @@ import { NewPokemonService } from '../../service/newPokemon.service';
 })
 export class PokemonListComponent {
 
-  pokemonService = inject(NewPokemonService);
+  store = inject(PokemonStore);
 
-  pokemonList: any = this.pokemonService.pokemonListFullSignal;
+  pokemonList: any = this.store.pokemonList;
 
-  pokemon: any;
-
-  displayDetail(pokemon: any){
-    this.pokemon = pokemon;
+  constructor(){
+    console.log('loading:', this.store.loading())
   }
+
 
 }

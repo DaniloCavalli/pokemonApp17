@@ -1,16 +1,14 @@
-<div class="pokemon-detail mt-4 card p-2">
-  <h2>{{ pokemon['name'] }}</h2>
-  <p><b>ID: {{ pokemon['id'] }}</b></p>
-  <img [src]="pokemon['sprites']?.front_default" alt="">
-  <ul class="">
-    <label for="" class="mt-2">Abilities</label>
-    @for( ability of pokemon['abilities']; track ability ){
-      <li>{{ ability['ability'].name }}</li>
-    }
-  </ul>
-  <div class="actions">
-    <button 
-    class="btn btn-primary"
-    (click)="addToFavorites(pokemon)">add to favorites</button>
-  </div>
-</div>
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{ pokemon.name }}</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image [src]='pokemon.imagePath' alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <p>
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>SHOW DETAIL</button>
+  </mat-card-actions>
+</mat-card>

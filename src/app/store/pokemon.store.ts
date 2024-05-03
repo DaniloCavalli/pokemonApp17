@@ -1,19 +1,21 @@
 import { patchState, signalStore, withComputed, withMethods, withState } from "@ngrx/signals";
 import { Pokemon } from "../model/pokemon.model";
 import { computed, inject } from "@angular/core";
-import { PokemonService } from "../service/pokemon.service";
+import { PokemonStoreService } from "../service/pokeStore.service";
 
 
 export type PokemonFilter = 'all' | 'favorites';
 
 type PokemonState = {
-    pokemonList: Pokemon[] | any;
+    pokemonList: Pokemon[];
+    selectedPokemon: Pokemon | undefined;
     loading: boolean;
     filter: PokemonFilter;
 }
 
 const initialState: PokemonState = {
     pokemonList: [],
+    selectedPokemon: undefined,
     loading: false,
     filter: 'all'
 }
@@ -22,15 +24,14 @@ export const PokemonStore = signalStore(
     {providedIn: 'root'},
     withState(initialState),
     withMethods(
-        (store, pokemonService = inject(PokemonService)) => ({
-            
-            // load pokemon list
-            loadPokemonList(){
+        (store) => ({
 
-                patchState( store, {loading: true} )
+            setPokemonList( pokemonList: any ){
+                patchState( store, { pokemonList } )
+            },
 
-
-
+            setSelectedPokemon( selectedPokemon: Pokemon ){
+                patchState( store, { selectedPokemon } )
             }
 
         })
