@@ -8,6 +8,8 @@ import { PokemonStore } from '../../../store/pokemon.store';
 import { DialogService } from '@ngneat/dialog';
 import { PokemonDetailComponent } from '../pokemon-detail/pokemon-detail.component';
 import { Pokemon } from '../../../model/pokemon.model';
+import { ActivatedRoute, Params } from '@angular/router';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-pokemon-item',

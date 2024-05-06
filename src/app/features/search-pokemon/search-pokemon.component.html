@@ -12,7 +12,7 @@
             bindLabel="name" 
             bindValue="id" 
             [(ngModel)]="selectedPokemonId"
-            (change)="onSelectedPokemon(selectedPokemonId)">
+            (change)="onSelectedPokemon()">
             </ng-select>
         </div>
     </div>
@@ -21,12 +21,12 @@
 <div class="container">
     <div class="row">
         <div class="col-8 offset-2">
-                @if(selectedPokemon){
-                    <app-pokemon-item [pokemon]="selectedPokemon"></app-pokemon-item>
+                <!-- @if(selectedPokemon()){
+                    <app-pokemon-detail></app-pokemon-detail>
                 }
                 @else(){
                     <div class="card text-center p-5">#### placeholder ####</div>
-                }
+                } -->
             
         </div>
     </div>
