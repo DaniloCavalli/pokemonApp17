@@ -28,7 +28,7 @@ export class PokemonItemComponent {
   private dialog = inject(DialogService);
   store = inject(PokemonStore);
 
-  @Input() pokemon: Pokemon = {id: '', name: '', images: []};
+  @Input() pokemon: Pokemon | undefined = {id: '', name: '', images: []};
   
   onSelectedPokemon(){
     this.store.setSelectedPokemon(this.pokemon);

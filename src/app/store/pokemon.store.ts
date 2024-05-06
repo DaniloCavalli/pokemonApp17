@@ -30,8 +30,12 @@ export const PokemonStore = signalStore(
                 patchState( store, { pokemonList } )
             },
 
-            setSelectedPokemon( selectedPokemon: Pokemon ){
+            setSelectedPokemon( selectedPokemon: Pokemon | undefined ){
                 patchState( store, { selectedPokemon } )
+            },
+
+            clearSelectedPokemon(){
+                patchState( store, {selectedPokemon: undefined} )
             }
 
         })

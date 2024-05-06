@@ -1,6 +1,6 @@
 import { patchState } from '@ngrx/signals';
 import { Pokemon } from './../../model/pokemon.model';
-import { Component, Signal, computed, inject } from '@angular/core';
+import { Component, OnDestroy, Signal, computed, inject } from '@angular/core';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { PokemonService } from '../../service/pokemon.service';
@@ -23,7 +23,7 @@ import { PokemonDetailComponent } from '../pokemon-list/pokemon-detail/pokemon-d
   templateUrl: './search-pokemon.component.html',
   styleUrl: './search-pokemon.component.scss'
 })
-export class SearchPokemonComponent {
+export class SearchPokemonComponent implements OnDestroy{
   
 
   store = inject(PokemonStore);
@@ -31,12 +31,21 @@ export class SearchPokemonComponent {
   pokemonList = this.store.pokemonList;
 
   selectedPokemonId = undefined;
+  selectedPokemon = this.store.selectedPokemon;
 
   onSelectedPokemon(){
     const selectedPokemon = this.pokemonList().find( item => item.id === this.selectedPokemonId )    
     if(selectedPokemon){
       this.store.setSelectedPokemon(selectedPokemon)
     }
+  }
+
+  onClear(){
+    this.store.clearSelectedPokemon();
+  }
+
+  ngOnDestroy(): void {
+    this.onClear()
   }
 
 
