@@ -8,9 +8,18 @@
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <button
-    mat-raised-button color="primary"
-    (click)="onSelectedPokemon()"
-    mat-button>SHOW DETAIL</button>
+
+    @if( activeRoute === 'favorites' ){
+      <button
+      mat-raised-button color="primary"
+      (click)="showPokemonDetailPage()"
+      mat-button>SHOW DETAIL</button>
+    } @else {
+      <button
+      mat-raised-button color="primary"
+      (click)="onSelectedPokemon()"
+      mat-button>SHOW DETAIL</button>
+    }
+
   </mat-card-actions>
 </mat-card>

@@ -28,14 +28,38 @@ export class PokemonItemComponent {
   private dialog = inject(DialogService);
   store = inject(PokemonStore);
 
-  router = inject(Router);
+  route = inject(ActivatedRoute);
+  router = inject(Router)
+
+  activeRoute: string = '';
+
+  constructor(){
+    this.route.url.subscribe( url => {
+      this.activeRoute = url[0].path
+    })
+  }
 
   @Input() pokemon: Pokemon | undefined = {id: '', name: '', images: []};
   
   onSelectedPokemon(){
-    this.store.setSelectedPokemon(this.pokemon);
-    this.router.navigateByUrl(`favorites/${this.pokemon?.name}`)
+    this.store.setSelectedPokemon(this.pokemon);    
+    console.log('activeRoute', this.activeRoute)
+
+    const bodyModal = {
+        ...this.pokemon,
+        path: this.activeRoute
+    }
+
+    this.dialog.open(PokemonDetailComponent, {
+      data: {
+        ...bodyModal
+      },
+    })
     
+  }
+
+  showPokemonDetailPage(){
+    this.router.navigateByUrl(`favorites/${this.pokemon?.name}`)
   }
 
 }

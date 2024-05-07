@@ -11,7 +11,11 @@ export const routes: Routes = [
     },
     {
         path: 'favorites',
-        loadChildren: () => import('./features/favorites-list/favorites.routes').then( r => r.FAVORITES_ROUTES )
+        loadComponent: () => import('./features/favorites-list/favorites-list.component').then( c => c.FavoritesListComponent )
+    },
+    {
+        path: 'favorites/:name',
+        loadComponent: () => import('../app/shared/componenets/pokemon-detail-page/pokemon-detail-page.component').then( c => c.PokemonDetailPageComponent )
     },
     {
         path: '',

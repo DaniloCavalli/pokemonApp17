@@ -1,6 +1,13 @@
-
-
-<h2>{{name}}</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-12 d-flex justify-content-end mt-2">
+     <a href="#"><i class="material-icons" (click)="onCloseDialog($event)">close</i></a>
+    </div>
+    <div class="col-12 text-center mt-3">
+      <h1>{{ name }}</h1>
+    </div>
+  </div>
+</div>
 
 <div class="images px-5">
   <div class="row">
@@ -21,8 +28,8 @@
 </div>
 
 <div class="actions">
-  <button 
-  mat-button mat-raised-button 
-  color="primary"
-  (click)="onAddToFavotites()">Add To Favorites</button>
+    <button 
+    mat-button mat-raised-button 
+    color="primary"
+    (click)="onAddToFavotites()">Add To Favorites</button>
 </div>

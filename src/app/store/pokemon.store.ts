@@ -12,6 +12,7 @@ type PokemonState = {
     loading: boolean;
     filter: PokemonFilter;
     favorites: Pokemon[];
+    path: string;
 }
 
 const initialState: PokemonState = {
@@ -19,7 +20,8 @@ const initialState: PokemonState = {
     selectedPokemon: undefined,
     loading: false,
     filter: 'all',
-    favorites: []
+    favorites: [],
+    path: ''
 }
 
 export const PokemonStore = signalStore(
