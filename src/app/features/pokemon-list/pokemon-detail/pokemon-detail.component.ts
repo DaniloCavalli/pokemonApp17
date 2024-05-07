@@ -1,9 +1,11 @@
+import { PokemonService } from './../../../service/pokemon.service';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { DialogService, DialogRef } from '@ngneat/dialog';
 import { Pokemon } from '../../../model/pokemon.model';
 import { CommonModule, JsonPipe } from '@angular/common';
+import { PokemonStoreService } from '../../../service/pokeStore.service';
 
 @Component({
   selector: 'app-pokemon-detail',
@@ -15,7 +17,11 @@ import { CommonModule, JsonPipe } from '@angular/common';
 })
 export class PokemonDetailComponent {
 
+
+
   ref: DialogRef<Pokemon, boolean> = inject(DialogRef);
+
+  pokemonService = inject(PokemonStoreService);
 
   get name(){
     if (!this.ref.data) return 'Hello world';
@@ -34,9 +40,10 @@ export class PokemonDetailComponent {
     return this.ref.data.images;
   }
 
-  constructor(){
-    console.log('images', this.images.back_default)
+  onAddToFavotites(){
+    this.pokemonService.addToFavorites(this.ref.data)
   }
+
 
 
 }

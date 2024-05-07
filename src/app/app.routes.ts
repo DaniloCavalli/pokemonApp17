@@ -1,7 +1,4 @@
 import { Routes } from '@angular/router';
-import { PokemonListComponent } from './features/pokemon-list/pokemon-list.component';
-import { SearchPokemonComponent } from './features/search-pokemon/search-pokemon.component';
-import { FavoritesListComponent } from './features/favorites-list/favorites-list.component';
 
 export const routes: Routes = [
     {
@@ -14,7 +11,7 @@ export const routes: Routes = [
     },
     {
         path: 'favorites',
-        loadComponent: () => import('./features/favorites-list/favorites-list.component').then(c => c.FavoritesListComponent)
+        loadChildren: () => import('./features/favorites-list/favorites.routes').then( r => r.FAVORITES_ROUTES )
     },
     {
         path: '',
@@ -22,5 +19,11 @@ export const routes: Routes = [
         pathMatch: 'full'
         
     },
+    {
+        path: '**',
+        redirectTo: '/home',
+        pathMatch: 'full'
+        
+    }
     
 ];

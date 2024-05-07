@@ -2,6 +2,8 @@ import { Component, inject } from '@angular/core';
 import { NewPokemonService } from '../../service/newPokemon.service';
 import { JsonPipe } from '@angular/common';
 import { PokemonItemComponent } from '../pokemon-list/pokemon-item/pokemon-item.component';
+import { PokemonStore } from '../../store/pokemon.store';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-favorites-list',
@@ -12,8 +14,15 @@ import { PokemonItemComponent } from '../pokemon-list/pokemon-item/pokemon-item.
 })
 export class FavoritesListComponent {
 
-  pokemonService = inject(NewPokemonService);
+  store = inject(PokemonStore);
 
-  favoritesList = this.pokemonService.favoritesListSignal;
+  route = inject(ActivatedRoute);
+
+  constructor(){
+    this.route.params.subscribe( data => console.log('data', data) )
+  }
+
+
+  favoritesList = this.store.favorites;
 
 }

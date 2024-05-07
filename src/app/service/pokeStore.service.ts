@@ -1,8 +1,8 @@
+import { patchState } from '@ngrx/signals';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { concatMap, from, switchMap, toArray } from 'rxjs';
 import { PokemonStore } from '../store/pokemon.store';
-import { patchState } from '@ngrx/signals';
 import { Pokemon } from '../model/pokemon.model';
 
 @Injectable({providedIn: 'root'})
@@ -13,6 +13,8 @@ export class PokemonStoreService {
     store = inject(PokemonStore);
 
     private urlPokemonList = 'https://pokeapi.co/api/v2/pokemon/?limit=50';
+
+    favorites: Pokemon[] = [];
         
     getPokemonListNew(){
 
@@ -53,6 +55,11 @@ export class PokemonStoreService {
     getPokemon(url: any){
         const poke = this.http.get(url);
         return poke;
+    }
+
+    addToFavorites( pokemon: Pokemon ){
+        this.favorites.push(pokemon);
+        patchState( this.store, { favorites: this.favorites } )
     }
 
 
