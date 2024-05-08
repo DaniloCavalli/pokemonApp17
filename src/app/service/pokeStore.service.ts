@@ -15,6 +15,7 @@ export class PokemonStoreService {
     private urlPokemonList = 'https://pokeapi.co/api/v2/pokemon/?limit=50';
 
     favorites: Pokemon[] = [];
+    created: Pokemon[] = [];
         
     getPokemonListNew(){
 
@@ -63,11 +64,13 @@ export class PokemonStoreService {
     }
 
     deleteFromFavorites( id: string ){
-
-        console.log('favorites', this.favorites)
-
         this.favorites = this.favorites.filter( obj => obj.id !== id );
         patchState( this.store, { favorites: this.favorites } )
+    }
+
+    createPokemon( pokemon: Pokemon ){
+        this.created.push(pokemon);
+        patchState( this.store, { created: this.created } )
 
     }
 

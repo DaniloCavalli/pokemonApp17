@@ -4,7 +4,7 @@ import { computed, inject } from "@angular/core";
 import { PokemonStoreService } from "../service/pokeStore.service";
 
 
-export type PokemonFilter = 'all' | 'favorites';
+export type PokemonFilter = 'all' | 'favorites' | 'created';
 
 type PokemonState = {
     pokemonList: Pokemon[];
@@ -12,6 +12,7 @@ type PokemonState = {
     loading: boolean;
     filter: PokemonFilter;
     favorites: Pokemon[];
+    created: Pokemon[];
     path: string;
 }
 
@@ -21,6 +22,7 @@ const initialState: PokemonState = {
     loading: false,
     filter: 'all',
     favorites: [],
+    created: [],
     path: ''
 }
 
@@ -40,9 +42,32 @@ export const PokemonStore = signalStore(
 
             clearSelectedPokemon(){
                 patchState( store, {selectedPokemon: undefined} )
+            },
+
+            updateFilter( filter: PokemonFilter ){
+                patchState( store, {filter} )
             }
 
         })
             
-    )
+    ),
+    withComputed( (initialState) => ({
+    
+        filteredList: computed( () => {
+
+            switch(initialState.filter()){
+                case 'all':
+                    return initialState.pokemonList()
+                    case 'favorites':
+                        return initialState.favorites()
+                        case 'created':
+                            return initialState.created()
+                            default:
+                                return initialState.pokemonList()
+            }
+
+
+        })
+
+    }))
 )

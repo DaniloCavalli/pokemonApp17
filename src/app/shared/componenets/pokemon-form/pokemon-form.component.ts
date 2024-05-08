@@ -47,7 +47,10 @@ export class PokemonFormComponent {
   }
 
   onSubmit() {
-    console.log(this.pokemonForm.value);
+    const createdPokemon = {
+      ...this.pokemonForm.getRawValue(),
+      id: Date.now().toString()
+    }
   }
 
   onDelete( index: number ){
