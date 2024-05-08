@@ -38,7 +38,7 @@ export class PokemonFormComponent {
     return this.pokemonForm.get('images') as FormArray;
   }
 
-  addBook() {
+  addAbility() {
     this.abilities.push(this.fb.control(''));
   }
 
@@ -49,28 +49,9 @@ export class PokemonFormComponent {
   onSubmit() {
     console.log(this.pokemonForm.value);
   }
-  
 
-  // pokemonForm: FormGroup = this.fb.group({
-  //   name: [''],
-  //   images: this.fb.array([this.fb.control('')]),
-  //   abilities: this.fb.array([this.fb.control('')]),
-  // })
-  
-  // get images() {
-  //   return this.pokemonForm.get('images') as FormArray;
-  // }
-
-  // get abilities() {
-  //   return this.pokemonForm.get('abilities') as FormArray;
-  // }
-
-  // get name(){
-  //   return this.pokemonForm.get('name') as FormControl;
-  // }
-
-  // addImage() {
-  //   this.images.push(this.formBuilder.control(''));
-  // }
+  onDelete( index: number ){
+    this.images.removeAt(index);
+  }
 
 }

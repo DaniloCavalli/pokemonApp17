@@ -1,74 +1,101 @@
-<!-- 
+
 <div class="container">
     <div class="row">
-        <div class="col-12 mt-5">
-            <h1 class="text-center">Create your pokemon</h1>
+        <div class="col-12">
+            <h1 class="text-center my-5">
+                Create your pokemon
+            </h1>
         </div>
     </div>
     <div class="row">
-        <div class="col-8 offset-4 mt-5">
-            <form class="example-form">
+        <div class="col-4 offset-4">
 
-                <mat-form-field class="example-full-width">
-                  <mat-label>Name</mat-label>
-                  <input matInput placeholder="Ex. Pizza" value="Sushi">
-                </mat-form-field>
-              
-                <div formArrayName="images">
-                    <ng-container *ngFor="let image of images.controls; let i = index">
-                        <mat-form-field class="example-full-width">
-                            <mat-label>images</mat-label>
-                            <input 
-                            matInput 
-                            placeholder="Ex. Pizza" 
-                            value="Sushi"
-                            [formControlName]="i">
-                        </mat-form-field>
-                    </ng-container>
-                </div>
+            <!-- pokemon form -->
+            <form [formGroup]="pokemonForm" (ngSubmit)="onSubmit()">
 
+                <!--  name -->
+                <section>   
+                    <h3>Name</h3>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Name</mat-label>
+                        <input 
+                        matInput 
+                        placeholder="Ex. pikachu" 
+                        formControlName="name">
+                    </mat-form-field>
+                </section>
+
+                <!--  images -->
+                <section>
+                    <div formArrayName="images">
+                        <div class="top-container d-flex justify-content-between">
+                            <h3>Images</h3>
+                            <button 
+                            mat-raised-button
+                            type="button"
+                            (click)="addImage()">+ add image</button>
+                        </div>
+                      
+                        <div *ngFor="let image of images.controls; let i=index">
+                            <div class="control-wrapper">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Image path</mat-label>
+                                    <input 
+                                    matInput 
+                                    placeholder="Ex. http://" 
+                                    [formControlName]="i">
+                                </mat-form-field>
+                                <button 
+                                mat-raised-button
+                                color="warn"
+                                type="button"
+                                (click)="onDelete(i)">delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!--  abilities -->
+                <section>
+                    <div formArrayName="abilities">
+                        <div class="top-container d-flex justify-content-between">
+                            <h3>Abilities</h3>
+                            <button 
+                            mat-raised-button
+                            type="button"
+                            (click)="addAbility()">+ add ability</button>
+                        </div>
+                        <div *ngFor="let ability of abilities.controls; let i=index">
+                            <div class="control-wrapper">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Ability</mat-label>
+                                    <input 
+                                    matInput 
+                                    placeholder="Ex. fly" 
+                                    [formControlName]="i">
+                                </mat-form-field>
+                                <button 
+                                mat-raised-button
+                                type="button"
+                                color="warn"
+                                (click)="onDelete(i)">delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            
+            
+                <!-- Submit Button -->
                 <button 
-                mat-raised-button 
-                color="primary">add image</button>
+                mat-flat-button 
+                color="primary"
+                type="submit">CREA</button>
+            </form>
 
-
-              </form>
         </div>
     </div>
 </div>
- -->
 
 
-<!-- profile-editor.component.html -->
-<form [formGroup]="pokemonForm" (ngSubmit)="onSubmit()">
-    <label>
-      Name:
-      <input type="text" formControlName="firstName">
-    </label>
-    <!-- FormArray for images -->
-    <div formArrayName="abilities">
-      <h3>Abilities</h3>
-      <button type="button" (click)="addBook()">Add abilities</button>
-      <div *ngFor="let ability of abilities.controls; let i=index">
-        <label>
-          ability {{ i + 1 }}:
-          <input type="text" [formControlName]="i">
-        </label>
-      </div>
-    </div>
 
-    <!-- FormArray for favorite books -->
-    <div formArrayName="images">
-      <h3>Images</h3>
-      <button type="button" (click)="addImage()">Add image</button>
-      <div *ngFor="let image of images.controls; let i=index">
-        <label>
-          image {{ i + 1 }}:
-          <input type="text" [formControlName]="i">
-        </label>
-      </div>
-    </div>
-  
-    <!-- Submit Button -->
-    <button type="submit">Submit</button>
-  </form>
