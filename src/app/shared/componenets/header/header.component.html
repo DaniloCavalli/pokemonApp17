@@ -38,6 +38,15 @@
                 <a 
                 class="nav-link" 
                 href="#"
+                routerLink="create"
+                routerLinkActive
+                #create="routerLinkActive"
+                [ngClass]="create.isActive ? 'active' : '' ">Create</a>
+              </li>
+              <li class="nav-item">
+                <a 
+                class="nav-link" 
+                href="#"
                 routerLink="logout"
                 routerLinkActive
                 #logOut="routerLinkActive"

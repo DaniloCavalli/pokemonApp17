@@ -10,6 +10,8 @@ import { PokemonDetailComponent } from '../pokemon-detail/pokemon-detail.compone
 import { Pokemon } from '../../../model/pokemon.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { map } from 'rxjs';
+import {MatIconModule} from '@angular/material/icon'
+import { PokemonStoreService } from '../../../service/pokeStore.service';
 
 @Component({
   selector: 'app-pokemon-item',
@@ -18,7 +20,8 @@ import { map } from 'rxjs';
     MatButtonModule,
     MatCardModule,
     CommonModule,
-    JsonPipe
+    JsonPipe,
+    MatIconModule
   ],
   templateUrl: './pokemon-item.component.html',
   styleUrl: './pokemon-item.component.scss'
@@ -27,6 +30,7 @@ export class PokemonItemComponent {
   
   private dialog = inject(DialogService);
   store = inject(PokemonStore);
+  pokemonService = inject(PokemonStoreService);
 
   route = inject(ActivatedRoute);
   router = inject(Router)
@@ -43,7 +47,6 @@ export class PokemonItemComponent {
   
   onSelectedPokemon(){
     this.store.setSelectedPokemon(this.pokemon);    
-    console.log('activeRoute', this.activeRoute)
 
     const bodyModal = {
         ...this.pokemon,
@@ -60,6 +63,15 @@ export class PokemonItemComponent {
 
   showPokemonDetailPage(){
     this.router.navigateByUrl(`favorites/${this.pokemon?.name}`)
+    patchState(this.store, {selectedPokemon: this.pokemon})
+  }
+
+  onDeleteFromFavorites(){
+    
+    if(this.pokemon){
+      this.pokemonService.deleteFromFavorites( this.pokemon?.id )
+    }
+
   }
 
 }

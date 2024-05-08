@@ -62,6 +62,15 @@ export class PokemonStoreService {
         patchState( this.store, { favorites: this.favorites } )
     }
 
+    deleteFromFavorites( id: string ){
+
+        console.log('favorites', this.favorites)
+
+        this.favorites = this.favorites.filter( obj => obj.id !== id );
+        patchState( this.store, { favorites: this.favorites } )
+
+    }
+
 
 
 }

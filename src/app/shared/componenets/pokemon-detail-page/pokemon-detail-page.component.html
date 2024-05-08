@@ -1,37 +1,45 @@
 
-<div class="container">
-    <div class="row">
-        <div class="col-12 text-center my-5">
-            <h1> {{ pokemonDetail()?.name }} </h1>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center my-5">
+                <h1> ### {{ pokemonDetail()?.name }} ### </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3 d-flex justify-content-center">
+                <img [src]=" pokemonDetail()?.images.front_default " alt="" style="width: 200px">
+            </div>
+            <div class="col-3 d-flex justify-content-center">
+                <img [src]=" pokemonDetail()?.images.back_default " alt="" style="width: 200px">
+            </div>
+            <div class="col-3 d-flex justify-content-center">
+                <img [src]=" pokemonDetail()?.images.front_shiny " alt="" style="width: 200px">
+            </div>
+            <div class="col-3 d-flex justify-content-center">
+                <img [src]=" pokemonDetail()?.images.front_shiny " alt="" style="width: 200px">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 abilities">
+                <label for="abilities">abilities</label>
+                <ul>
+                    @for( ability of pokemonDetail()?.abilities; track ability ){
+    
+                        <li> {{ ability?.ability['name'] }} </li>
+    
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <button mat-raised-button color="warn" (click)="goBack()">back to favorites</button>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-3 d-flex justify-content-center">
-            <img [src]=" pokemonDetail()?.images.front_default " alt="" style="width: 200px">
-        </div>
-        <div class="col-3 d-flex justify-content-center">
-            <img [src]=" pokemonDetail()?.images.back_default " alt="" style="width: 200px">
-        </div>
-        <div class="col-3 d-flex justify-content-center">
-            <img [src]=" pokemonDetail()?.images.front_shiny " alt="" style="width: 200px">
-        </div>
-        <div class="col-3 d-flex justify-content-center">
-            <img [src]=" pokemonDetail()?.images.front_shiny " alt="" style="width: 200px">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-4">
-            <label for="abilities">abilities</label>
-            <ul>
-                <li>ability</li>
-                <li>ability</li>
-                <li>ability</li>
-            </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 text-center">
-            <button mat-raised-button color="warn" (click)="goBack()">back to favorites</button>
-        </div>
-    </div>
-</div>
+
+
+
+

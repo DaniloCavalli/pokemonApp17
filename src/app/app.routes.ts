@@ -18,6 +18,10 @@ export const routes: Routes = [
         loadComponent: () => import('../app/shared/componenets/pokemon-detail-page/pokemon-detail-page.component').then( c => c.PokemonDetailPageComponent )
     },
     {
+        path: 'create',
+        loadComponent: () => import('../app/shared/componenets/pokemon-form/pokemon-form.component').then( c => c.PokemonFormComponent )
+    },
+    {
         path: '',
         redirectTo: '/home',
         pathMatch: 'full'
