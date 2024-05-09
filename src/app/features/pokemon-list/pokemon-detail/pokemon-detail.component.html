@@ -11,10 +11,9 @@
 
 <div class="images px-5">
   <div class="row">
-    <img class="col-6 p-3" [src]="images.back_default" alt="">
-    <img class="col-6 p-3" [src]="images.front_default" alt="">
-    <img class="col-6 p-3" [src]="images.front_shiny" alt="">
-    <img class="col-6 p-3" [src]="images.back_shiny" alt="">
+    @for( image of images; track image ){
+      <img class="col-6 p-3" [src]="image" alt="">
+    }
   </div>
 </div>
 
@@ -28,8 +27,30 @@
 </div>
 
 <div class="actions">
-    <button 
-    mat-button mat-raised-button 
-    color="primary"
-    (click)="onAddToFavotites()">Add To Favorites</button>
+
+    @switch(store.filter()){
+
+      @case ('all'){
+        <button 
+        mat-button mat-raised-button 
+        color="primary"
+        (click)="onAddToFavotites()">Add To Favorites</button>
+      }
+
+      @case ('favorites'){
+        <button 
+        mat-button mat-raised-button 
+        color="warn"
+        (click)="onDeleteFavorites()">Delete</button>
+      }
+
+      @case ('created'){
+        <button 
+        mat-button mat-raised-button 
+        color="primary"
+        (click)="onEdit()">Edit</button>
+      }
+
+    }
+
 </div>

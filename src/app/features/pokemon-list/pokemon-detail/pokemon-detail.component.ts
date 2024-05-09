@@ -8,7 +8,7 @@ import { CommonModule, JsonPipe } from '@angular/common';
 import { PokemonStoreService } from '../../../service/pokeStore.service';
 import { patchState } from '@ngrx/signals';
 import { PokemonStore } from '../../../store/pokemon.store';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-pokemon-detail',
@@ -25,8 +25,13 @@ export class PokemonDetailComponent {
   ref: DialogRef<Pokemon | any, boolean> = inject(DialogRef);
   store = inject(PokemonStore);
   route = inject(ActivatedRoute);
+  router = inject(Router);
 
   pokemonService = inject(PokemonStoreService);
+
+  constructor(){
+    console.log( this.store.filter() )
+  }
 
   get name(){
     if (!this.ref.data) return 'Hello world';
@@ -48,7 +53,14 @@ export class PokemonDetailComponent {
   }
 
   get images(){
-    return this.ref.data.images;
+
+    let arr = [];
+    arr.push(this.ref.data.images.front_default)
+    arr.push(this.ref.data.images.back_default)
+    arr.push(this.ref.data.images.front_shiny)
+    arr.push(this.ref.data.images.back_shiny)
+
+    return arr;
   }
 
   onAddToFavotites(){
@@ -68,6 +80,18 @@ export class PokemonDetailComponent {
       patchState( this.store, {selectedPokemon: undefined} )
     }
 
+  }
+
+  onDeleteFavorites(){
+    this.pokemonService.deleteFromFavorites(this.ref.data.id);
+    patchState( this.store, {selectedPokemon: undefined} )
+    this.ref.close();
+  }
+
+  onEdit(){
+    this.router.navigateByUrl(`edit/${this.ref.data.id}`);
+    this.ref.close();
+    patchState( this.store, { selectedPokemon: this.ref.data } )
   }
 
 

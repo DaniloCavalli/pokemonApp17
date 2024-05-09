@@ -1,6 +1,6 @@
 export class Pokemon {
     id: string;
-    name: string;
+    name: string | null;
     imagePath?: string;
     images: any;
     abilities?: any[];
