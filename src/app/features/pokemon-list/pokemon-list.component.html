@@ -1,48 +1,59 @@
 
-@if( loading() ){
-  <div class="spinner-container">
-    <mat-spinner></mat-spinner>
-  </div>
-}
-@else {
-  <div class="container">
-    <div class="row">
-      <div class="col-12 text-center mt-5">
-        <mat-button-toggle-group 
-        name="fontStyle" 
-        aria-label="Font Style"
-        #filter
-        (change)="onFilterPokemonList($event)">
-          <mat-button-toggle value="all">All</mat-button-toggle>
-          <mat-button-toggle value="favorites">Favorites</mat-button-toggle>
-          <mat-button-toggle value="created">Created</mat-button-toggle>
-        </mat-button-toggle-group>        
-      </div>
-    </div>
-    @if( store.filteredList().length ){
-      <div class="row">
-        <div class="col-12">
-          <h1 class="mt-4 text-center"> Select one pokemon from the list </h1>
-        </div>
-      </div>
-      <div class="row">
-        @for( pokemon of store.filteredList(); track pokemon ){
-            <div class="col-2 mt-3">
-              <app-pokemon-item 
-              [pokemon]="pokemon"></app-pokemon-item>
-            </div>
-        }
-      </div>
-    } @else {
-      <div class="row">
-        <div class="col-12">
-          <h1 class="mt-4 text-center"> Sorry, list is empty </h1>
-        </div>
+@if( !store.isAuthUser() ){
+  <ng-container>
+    placeholder
+  </ng-container>
+} @else {
+  <ng-container>
+    @if( loading() ){
+      <div class="spinner-container">
+        <mat-spinner></mat-spinner>
       </div>
     }
-
-  </div>
+    @else {
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center mt-5">
+            <mat-button-toggle-group 
+            name="fontStyle" 
+            aria-label="Font Style"
+            #filter
+            (change)="onFilterPokemonList($event)">
+              <mat-button-toggle value="all">All</mat-button-toggle>
+              <mat-button-toggle value="favorites">Favorites</mat-button-toggle>
+              <mat-button-toggle value="created">Created</mat-button-toggle>
+            </mat-button-toggle-group>        
+          </div>
+        </div>
+        @if( store.filteredList().length ){
+          <div class="row">
+            <div class="col-12">
+              <h1 class="mt-4 text-center"> Select one pokemon from the list </h1>
+            </div>
+          </div>
+          <div class="row">
+            @for( pokemon of store.filteredList(); track pokemon ){
+                <div class="col-2 mt-3">
+                  <app-pokemon-item 
+                  [pokemon]="pokemon"></app-pokemon-item>
+                </div>
+            }
+          </div>
+        } @else {
+          <div class="row">
+            <div class="col-12">
+              <h1 class="mt-4 text-center"> Sorry, list is empty </h1>
+            </div>
+          </div>
+        }
+    
+      </div>
+    }
+  </ng-container>
 }
+
+
+
 
 
 

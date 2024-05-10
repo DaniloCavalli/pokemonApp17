@@ -7,6 +7,7 @@ import { PokemonStoreService } from "../service/pokeStore.service";
 export type PokemonFilter = 'all' | 'favorites' | 'created';
 
 type PokemonState = {
+    isAuthUser: boolean,
     pokemonList: Pokemon[];
     selectedPokemon: Pokemon | undefined;
     loading: boolean;
@@ -17,6 +18,7 @@ type PokemonState = {
 }
 
 const initialState: PokemonState = {
+    isAuthUser: false,
     pokemonList: [],
     selectedPokemon: undefined,
     loading: false,
