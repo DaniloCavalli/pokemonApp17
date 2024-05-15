@@ -29,9 +29,6 @@ export class PokemonDetailComponent {
 
   pokemonService = inject(PokemonStoreService);
 
-  constructor(){
-    console.log( this.store.filter() )
-  }
 
   get name(){
     if (!this.ref.data) return 'Hello world';

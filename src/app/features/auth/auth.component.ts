@@ -22,23 +22,20 @@ export class AuthComponent {
     password: ['', Validators.required]
   })
 
+
   onSubmit(){
-    console.log(this.authForm.valid)
-
-    if(this.authForm.valid){
-
       const username = this.authForm.get('username')?.value as string;
       const password = this.authForm.get('password')?.value as string;
 
-      // Call the authentication service's login method
-      if (this.authService.login(username, password)) {
-        // Navigate to the ProductListComponent upon successful login
+      // validate user and password
+      if(username === 'pippo' && password === 'pass123!'){
+        this.authService.login(username, password);
         this.router.navigate(['/home']);
       } else {
-        // Handle authentication error (show error message, etc.)
+        this.authForm.controls.username.setErrors({'incorrect': true});
+        this.authForm.controls.password.setErrors({'incorrect': true});
       }
 
-    }
   }
 
 

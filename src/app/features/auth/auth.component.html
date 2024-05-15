@@ -2,13 +2,23 @@
     <div class="row justify-content-center mt-5">
       <div class="col-md-6">
         <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
-          <div class="form-group mt-5">
+          <div
+          [class.warning]="authForm.controls.username.invalid && authForm.controls.username.invalid" 
+          class="form-group mt-5">
             <label for="username">Username</label>
             <input type="text" class="form-control" id="username" formControlName="username" placeholder="Enter username">
+            <ng-container>
+              <label for="usernameLabel" class="warn-label">user is not valid!</label>
+            </ng-container>
           </div>
-          <div class="form-group mt-3">
+          <div 
+          [class.warning]="authForm.controls.password.invalid && authForm.controls.password.invalid" 
+          class="form-group mt-3">
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
+            <ng-container>
+              <label for="passwordLabel" class="warn-label">password is not valid!</label>
+            </ng-container>
           </div>
           <button type="submit" class="btn btn-primary mt-5" style="margin-top: 6px;">Login</button>
         </form>

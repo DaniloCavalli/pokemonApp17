@@ -4,6 +4,7 @@ import { Injectable, inject } from '@angular/core';
 import { concatMap, from, switchMap, toArray } from 'rxjs';
 import { PokemonStore } from '../store/pokemon.store';
 import { Pokemon } from '../model/pokemon.model';
+import { AlertMessageService } from '../shared/componenets/alert-message/alertMessage.service';
 
 @Injectable({providedIn: 'root'})
 export class PokemonStoreService {
@@ -11,6 +12,7 @@ export class PokemonStoreService {
 
     http = inject(HttpClient);
     store = inject(PokemonStore);
+    alertService = inject(AlertMessageService);
 
     private urlPokemonList = 'https://pokeapi.co/api/v2/pokemon/?limit=50';
 
@@ -69,8 +71,15 @@ export class PokemonStoreService {
     }
 
     createPokemon( pokemon: Pokemon ){
-        this.created.push(pokemon);
-        patchState( this.store, { created: this.created } )
+        this.store.setAlertMessage('successfully created pokemon !', 'success');
+
+        setTimeout( () => {
+            this.created.push(pokemon);
+            patchState( this.store, { created: this.created } )
+            this.store.resetAlertMessage();
+            
+        }, 1000)
+
     }
 
 

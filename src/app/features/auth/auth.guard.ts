@@ -14,7 +14,6 @@ export class AuthGuard {
 
     private checkAuth(): boolean {
         if( this.authService.isAuthenticatedUser() ){
-            console.log('is auth')
             return true
         } else {
             // Redirect to the login page if the user is not authenticated

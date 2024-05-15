@@ -1,5 +1,9 @@
 <app-header></app-header>
 
+@if( store.alertMessage() ){
+    <app-alert-message></app-alert-message>
+}
+
 <router-outlet></router-outlet>
 
 

@@ -5,6 +5,12 @@ import { PokemonStoreService } from "../service/pokeStore.service";
 
 
 export type PokemonFilter = 'all' | 'favorites' | 'created';
+export type AlertType = 'success' | 'danger';
+
+interface AlertMesage {
+    message: string,
+    type: AlertType | undefined
+}
 
 type PokemonState = {
     isAuthUser: boolean,
@@ -15,6 +21,7 @@ type PokemonState = {
     favorites: Pokemon[];
     created: Pokemon[];
     path: string;
+    alertMessage: AlertMesage | undefined
 }
 
 const initialState: PokemonState = {
@@ -25,7 +32,8 @@ const initialState: PokemonState = {
     filter: 'all',
     favorites: [],
     created: [],
-    path: ''
+    path: '',
+    alertMessage: undefined
 }
 
 export const PokemonStore = signalStore(
@@ -48,6 +56,18 @@ export const PokemonStore = signalStore(
 
             updateFilter( filter: PokemonFilter ){
                 patchState( store, {filter} )
+            },
+
+            setAlertMessage( message: string, type: AlertType ){
+                patchState( store, {
+                    alertMessage: {
+                        message: message,
+                        type: type
+                    }
+                })
+            },
+            resetAlertMessage(){
+                patchState( store, {alertMessage: undefined })
             }
 
         })

@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div 
+            class="alert alert-success" 
+            role="alert"
+            [ngClass]=" store.alertMessage()?.type === 'success' ? 'alert-succes' : 'alert-danger' ">
+            {{ store.alertMessage()?.message }}
+            </div>
+        </div>
+    </div>
+</div>

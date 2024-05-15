@@ -23,6 +23,7 @@ export class AuthService {
       patchState( this.store, {isAuthUser: true} )
       return true;
     } else {
+      patchState( this.store, {isAuthUser: false} )
       return false;
     }
   }
